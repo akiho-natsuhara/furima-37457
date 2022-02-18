@@ -14,7 +14,7 @@
 
 Association
 - has_many: items
-- has_many: purchase
+- has_many: purchases
 
 
 ##items テーブル
@@ -28,8 +28,7 @@ Association
 |shipping_area_id   | integer     | null: false                    |
 |shipping_days_id   | integer     | null: false                    |
 |price              | integer     | null: false                    |
-|user_id            | references  | null: false, foreign_key: true |
-|purchase_id        | references  | foreign_key: true              |
+|user               | references  | null: false, foreign_key: true |
 
 Association
 - belongs_to : user
@@ -42,22 +41,20 @@ Association
 |post_code          | string     | null: false                       |
 |prefecture_id      | integer    | null: false                       |
 |city               | string     | null: false                       |
-|house_number       | integer    | null: false                       |
-|building_name      | string     | null: false                       |
-|phone_number       | integer    | null: false                       |
-|user_id            | references | null: false, foreign_key: true    | 
+|house_number       | string     | null: false                       |
+|building_name      | string     |                                   |
+|phone_number       | string     | null: false                       |
 
 Association
 - belongs_to: user
-- has_one: pay_card
 
 ##purchases テーブル
 | Colum             | Type       | Options                           |
 |-------------------|------------|-----------------------------------|
-|user_id            | references | null: false, foreign_key: true    | 
-|item_id            | references | null: false, foreign_key: true    | 
+|user               | references | null: false, foreign_key: true    | 
+|item               | references | null: false, foreign_key: true    | 
 
 Association
 - belongs_to: item
 - has_one: shipping_address
-
+- belongs_to: user
