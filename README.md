@@ -1,24 +1,82 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##users テーブル
+| Colum             | Type   | Options     |
+|-------------------|------- |-------------|
+|nickname           | string | null: false |
+|email              | string | null: false |
+|encrypted_password | string | null: false |
+|last_name          | string | null: false |
+|last_name_kana     | string | null: false |
+|first_name         | string | null: false |
+|first_name_kana    | string | null: false |
+|birthday           | date   | null: false |
 
-Things you may want to cover:
+Association
+- has_many : items
+- has_one : purchase
 
-* Ruby version
 
-* System dependencies
+##items テーブル
+| Colum             | Type        | Options                        |
+|-------------------|-------------|--------------------------------|
+|name               | string      | null: false                    |
+|text               | text        | null: false                    |
+|status             | integer     | null: false, default: 0        |
+|cost               | integer     | null: false, default: 0        |
+|shipping_area      | integer     | null: false, default: 0        |
+|shipping_days      | integer     | null: false, default: 0        |
+|price              | integer     | null: false                    |
+|bland_id           | references  | foreign_key: true              |
+|user_id            | references  | null: false, foreign_key: true |
+|purchase_id        | references  | foreign_key: true              |
 
-* Configuration
+Association
+- belongs_to : user
+- belongs_to : bland
+- has_many : images
 
-* Database creation
 
-* Database initialization
+##purchases テーブル
+| Colum             | Type       | Options                           |
+|-------------------|------------|-----------------------------------|
+|last_name          | string     | null: false                       |
+|last_name_kana     | string     | null: false                       |
+|first_name         | string     | null: false                       |
+|first_name_kana    | string     | null: false                       |
+|post_code          | string     | null: false                       |
+|prefecture_id      | integer    | null: false, default: 0           |
+|city               | string     | null: false                       |
+|house_number       | integer    | null: false                       |
+|building_name      | string     | null: false                       |
+|phone_number       | integer    | null: false                       |
+|user_id            | references | null: false, foreign_key: true    | 
 
-* How to run the test suite
+Association
+- belongs_to : user
+- has_one : pay_card
 
-* Services (job queues, cache servers, search engines, etc.)
+##bland テーブル
+| Colum             | Type        | Options        |
+|-------------------|-------------|----------------|
+| name              | string      | index: true    |
 
-* Deployment instructions
+Association
+- has_many : items
 
-* ...
+##images テーブル
+| Colum         | Type       | Options                        |
+|---------------|------------|--------------------------------|
+| image         | string     | null: false                    |
+| item_id       | references | null: false, foreign_key: true |
+
+Association
+- belongs_to : item
+
+##pay_cards テーブル
+| Colum         | Type       | Options                        |
+| user_id       | references | null: false, foreign_key: true |
+| payjp_id      | string     | null: false                    |
+
+Association
+- belongs_to : purchase
