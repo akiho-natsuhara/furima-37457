@@ -35,7 +35,7 @@ Association
 - has_one :purchase
 
 
-##shipping_address テーブル
+##shipping_addresses テーブル
 | Colum             | Type       | Options                           |
 |-------------------|------------|-----------------------------------|
 |post_code          | string     | null: false                       |
@@ -44,9 +44,10 @@ Association
 |house_number       | string     | null: false                       |
 |building_name      | string     |                                   |
 |phone_number       | string     | null: false                       |
+|purchase           | references | null: false, foreign_key: true    |
 
 Association
-- belongs_to: user
+-belongs_to :purchase
 
 ##purchases テーブル
 | Colum             | Type       | Options                           |
