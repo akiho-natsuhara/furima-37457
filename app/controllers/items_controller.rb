@@ -4,6 +4,16 @@ class ItemsController < ApplicationController
     def index
     end
 
+    def new
+      @item = Item.new
+    end
+
+    def create
+      @item = Item.new(item_params)
+      if @item.sava
+        redirect_to root_path
+      else
+        render :new
 
 
 
@@ -14,5 +24,10 @@ class ItemsController < ApplicationController
           redirect_to action: :index
         end
     end
+
+    def item_params
+      params.require(:item).permit(:image, :name, :text, :category_id, :status_id, :cost_id, :prefecture_id, :shipping_day_id, :price).merge(user_id: current_user.id)
+    end
+  
 
 end
