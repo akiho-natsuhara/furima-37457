@@ -1,6 +1,6 @@
 class PurchasesController < ApplicationController
     before_action :authenticate_user!
-    before_action :non_purchased_item, only: [:index, :create, ]
+    before_action :non_purchased_item, only: [:index, :create]
 
     def index
       @purchase_form = PurchaseForm.new
@@ -15,7 +15,7 @@ class PurchasesController < ApplicationController
         render "index"   
       end
     end
-    
+
 
 
 
