@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.user_id == current_user.id && @item.purchase.nil?
+    unless user_signed_in? or @item.purchase.present? then
     else
       redirect_to root_path
     end
